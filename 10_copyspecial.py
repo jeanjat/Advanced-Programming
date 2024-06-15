@@ -38,7 +38,7 @@ def copy_to(paths,dir):
 
 def zip_to(paths, zipfile):
   archived = shutil.make_archive(zipfile, 'zip', paths)
-  if os.path.exists('E:/Zipped file.zip'):
+  if os.path.exists(paths):
     print(archived) 
   else: 
     print("ZIP file not created")
