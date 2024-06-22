@@ -27,14 +27,11 @@ def read_urls(filename):
     # +++your code here+++
 
     domain = "http://" + filename.split("_")[1]
-
     urls = set()
-
     pictures = re.findall('GET (\/.*?\.jpg)', open(filename).read())
 
     for picture in pictures:
         urls.add(domain + picture)
-
     return sorted(urls)
 
 def download_images(img_urls, dest_dir):
