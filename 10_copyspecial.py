@@ -21,23 +21,23 @@ import subprocess
 def special_path(dir):
   path1=[]
   for entry in os.listdir(dir):
-      match = re.search(r'__(\w+)__', entry)
+      match = re.search(r'__(\w+)__', entry) # Specific file name
       print(match)
       if match:
-        path1.append(os.path.abspath(os.path.join(dir, entry)))
+        path1.append(os.path.abspath(os.path.join(dir, entry))) # Files are added to the path list
   print(path1)
   return path1
 
 def copy_to(paths,dir):
  # newdir = '/Users/jean-/Desktop/New1'
-  if os.path.exists(dir)==False:
+  if os.path.exists(dir)==False: # If no direction with the given names exists then create one
       os.mkdir(dir)  
   for spath in paths:
-      file = os.path.basename(spath)
-      shutil.copy(spath, os.path.join(dir,file))
+      file = os.path.basename(spath) # Go through all the files in paths list
+      shutil.copy(spath, os.path.join(dir,file)) # Copy them to the direction given
 
 def zip_to(paths, zipfile):
-  archived = shutil.make_archive(zipfile, 'zip', paths)
+  archived = shutil.make_archive(zipfile, 'zip', paths) # Zip the files
   if os.path.exists(paths):
     print(archived) 
   else: 
@@ -78,10 +78,10 @@ def main():
   # +++your code here+++
   # Call your functions
   paths=[]
- # search = '/Users/jean-/Desktop/CopySpecial'
-  for dirname in args:
-    paths.extend(special_path(dirname))
- # paths=special_path(search)
+
+  for dirname in args: 
+    paths.extend(special_path(dirname)) # Add the path written to paths list
+
   print(paths)
   copy_to(paths, todir)
   zip_to(paths,tozip)
