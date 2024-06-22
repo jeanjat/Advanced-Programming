@@ -29,15 +29,16 @@ def special_path(dir):
   return path1
 
 def copy_to(paths,dir):
- # newdir = '/Users/jean-/Desktop/New1'
-  if os.path.exists(dir)==False: # If no direction with the given names exists then create one
+  if not os.path.exists(dir): # If no direction with the given names exists then create one
       os.mkdir(dir)  
   for spath in paths:
       file = os.path.basename(spath) # Go through all the files in paths list
       shutil.copy(spath, os.path.join(dir,file)) # Copy them to the direction given
 
-def zip_to(paths, zipfile):
-  archived = shutil.make_archive(zipfile, 'zip', paths) # Zip the files
+def zip_to(paths,zippath):
+  order = 'zip -j '  + ' ' + ''.join(paths)
+  print("Command I'm going to do:" + order)
+  archived = shutil.make_archive('zipfile', 'zip', zippath) # Zip the files
   if os.path.exists(paths):
     print(archived) 
   else: 
@@ -83,7 +84,10 @@ def main():
     paths.extend(special_path(dirname)) # Add the path written to paths list
 
   print(paths)
+ 
   copy_to(paths, todir)
-  zip_to(paths,tozip)
+
+  zip_to(paths,todir)
+  
 if __name__ == '__main__':
   main()
